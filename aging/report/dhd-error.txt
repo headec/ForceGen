@@ -1,0 +1,54 @@
+$ ntox86_64-gdb usb-4k-dhd-button usb-4k-dhd-button.core
+
+GNU gdb (GDB) 8.2.1 [qnx710 r1522] (STABLE)
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "--host=x86_64-pc-linux-gnu --target=x86_64-pc-nto-qnx7.1.0".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.qnx.com/support/bugreports>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from usb-4k-dhd-button...done.
+[New pid 6324254 tid 1]
+[New pid 6324254 tid 2]
+
+warning: Host file /home/eqkr-ntd25/qnx710/target/qnx7/x86_64/lib/libm.so.3 does not match target file /proc/boot/libm.so.3
+
+warning: Host file /home/eqkr-ntd25/qnx710/target/qnx7/x86_64/usr/lib/ldqnx-64.so.2 does not match target file /usr/lib/ldqnx-64.so.2
+
+warning: Host file /home/eqkr-ntd25/qnx710/target/qnx7/x86_64/lib/libc.so.5 does not match target file /proc/boot/libc.so.5
+
+warning: Host file /home/eqkr-ntd25/qnx710/target/qnx7/x86_64/lib/libgcc_s.so.1 does not match target file /proc/boot/libgcc_s.so.1
+
+warning: Host file /home/eqkr-ntd25/qnx710/target/qnx7/x86_64/lib/libcatalog.so.1 does not match target file /lib/libcatalog.so.1
+
+warning: Could not load shared library symbols for 5 libraries, e.g. /proc/boot/libm.so.3.
+Use the "info sharedlibrary" command to see the complete listing.
+Do you need "set solib-search-path" or "set sysroot"?
+Program terminated with signal SIGSEGV, Segmentation fault.
+#0  0x000000151cf263ec in ?? ()
+[Current thread is 1 (pid 6324254 tid 1)]
+(gdb) bt
+#0  0x000000151cf263ec in ?? ()
+#1  0x00000052c14e33b6 in dhdUSBWriteDataSync(void*, unsigned char*, int, int)
+    ()
+#2  0x00000052c1467b52 in dhdComUSB::IOSpin(int) ()
+#3  0x00000052c14b2a2e in dhdComUSB2G::ReloadConfig() ()
+#4  0x00000052c1447ca2 in DHD::IDHD::SetParam(int, double) ()
+#5  0x00000052c147121e in dhdMemory::PushParams() ()
+#6  0x00000052c1466030 in dhdMemoryDynMM::Load() ()
+#7  0x00000052c1456889 in DHD::IDHD::ReadConfig() ()
+#8  0x00000052c145697b in DHD::IDHD::ConfigDevice(int, int) ()
+#9  0x00000052c144fc3d in DHD::Open() ()
+#10 0x00000052c1440e89 in dhdOpen ()
+#11 0x00000052c143714e in handctrl::initiate(mode) ()
+#12 0x00000052c143709c in handctrl::handctrl(mode) ()
+#13 0x00000052c1436dc1 in main ()
+(gdb)

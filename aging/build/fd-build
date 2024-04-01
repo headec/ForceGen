@@ -1,0 +1,13 @@
+opt=pre_aging
+target=aging_test
+if [ "$1" != "" ]; then
+	opt=$1
+fi
+if [ "$2" != "" ]; then
+	target=$2
+fi
+	q++ ../src/$target.cpp -L ~/els1000/els1000/epsilon/dep/ForceDimension/qnx710/lib/release/qnx-x86_64-qcc-8.3.0 -I ~/els1000/els1000/epsilon/dep/ForceDimension/qnx710/externals/Eigen -I ~/els1000/els1000/epsilon/dep/ForceDimension/qnx710/include -ldrd -ldhd -lsocket -lusbdi -o $opt
+mv $opt bin/
+if [ "$3" != "-i" ]; then
+	scp ./bin/$opt root@192.168.0.10:/root/aging
+fi

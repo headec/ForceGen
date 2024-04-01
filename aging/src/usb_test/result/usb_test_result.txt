@@ -1,0 +1,30 @@
+< Issue - Found on Thursday, April 13th, 2023 > 
+Using Lambda from Epsilon, the following error was found:
+- "Process 798752 (el1000.core) terminated SIGSEGV code=1 fltno=11 ip=00000057095273ec(/proc/boot/libc.so.5@pthread_mutex_unlock+0x000000000000000c) mapaddr=00000000000363ec. ref=0000000000000004
+Memory fault (core dumped)"
+
+< Test - conducted by Yong >
+Device: omega 6
+
+Tested issue: 
+Reproduced error using Omega from Yong's custom code (usb_test.cpp), 
+- "Process 1396764 (usb-test) terminated SIGSEGV code=1 fltno=11 ip=0000005b076083ec(/proc/boot/libc.so.5@pthread_mutex_unlock+0x000000000000000c) mapaddr=00000000000363ec. ref=0000000000000004
+Memory fault (core dumped)"
+
+Latest test conducted on:
+Monday, April 17th, 2023
+
+Steps taken to reproduce the error:
+    1. initiate the Force Dimension device either with DRD or DHD (or the bin file, ust_test, if applicable)
+    2. once initiated, unplug
+    3. repeat
+Each step will be considered as a trial.
+Each error will be considered as a sample.
+
+< Result >
+Regardless of the changes made to the _hid or the use of the dhd functions,
+using DRD:
+- when the USB is unplugged, the error still appears even with the default _hid value
+- trials taken to reproduce the error out of 12 samples: 1, 1, 2, 5, 6, 7, 8, 8, 10, 10, 13, 34
+using DHD:
+- not a single error occurred out of 100 trials
